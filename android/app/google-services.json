@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "531611479653",
+    "project_id": "konnect-clone-d458e",
+    "storage_bucket": "konnect-clone-d458e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:531611479653:android:17c69baf64a001f74fe08c",
+        "android_client_info": {
+          "package_name": "com.example.konnect_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxIXikq1R1wWWkDXN9cSNuiWrJIucm4oY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
