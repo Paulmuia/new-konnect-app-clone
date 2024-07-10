@@ -20,14 +20,14 @@ class TextFormFields extends StatelessWidget {
         controller: controller,
         decoration: InputDecoration(
           labelText: labelText,
-          border: OutlineInputBorder(
-            borderSide: const BorderSide(color: Colors.green),
+          border: const OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.green),
           ),
-          enabledBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: Colors.green),
+          enabledBorder: const OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.green),
           ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: Colors.green),
+          focusedBorder: const OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.green),
           ),
           filled: true,
           fillColor: Colors.white,
