@@ -182,24 +182,27 @@ class HomeContent extends StatelessWidget {
                     top: 80,
                     left: 5,
                     right: 5,
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                        color: Colors.white,
-                      ),
-                      height: 50,
-                      width: double.maxFinite,
-                      margin: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 10),
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 10),
-                      child: const Row(
-                        children: [
-                          Icon(Icons.search, color: Colors.green, size: 30),
-                          SizedBox(width: 20),
-                          Text('What are you looking for?',
-                              style: TextStyle(color: Colors.green)),
-                        ],
+                    child: GestureDetector(
+                      onTap: ()=>Get.to(SearchPage()),
+                      child: Container(
+                        decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          color: Colors.white,
+                        ),
+                        height: 50,
+                        width: double.maxFinite,
+                        margin: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 10),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 10),
+                        child: const Row(
+                          children: [
+                            Icon(Icons.search, color: Colors.green, size: 30),
+                            SizedBox(width: 20),
+                            Text('What are you looking for?',
+                                style: TextStyle(color: Colors.green)),
+                          ],
+                        ),
                       ),
                     ),
                   ),
