@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:konnect_app/pages/notification_page.dart';
+import 'package:konnect_app/pages/settings.dart';
 import 'package:konnect_app/widgets/custom_containers.dart';
 import 'package:konnect_app/widgets/row_texts.dart';
 
@@ -187,22 +188,25 @@ class AccountPage extends StatelessWidget {
                   Icons.arrow_forward_ios,
                   color: Colors.green,
                 )),
-            const CustomContainers(
-                icon: Icon(
-                  Icons.settings,
-                  color: Colors.green,
-                ),
-                text: Text(
-                  'Settings',
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 20),
-                ),
-                icon1: Icon(
-                  Icons.arrow_forward_ios,
-                  color: Colors.green,
-                )),
+            GestureDetector(
+              onTap: () => Get.to(const SettingsPage()),
+              child: const CustomContainers(
+                  icon: Icon(
+                    Icons.settings,
+                    color: Colors.green,
+                  ),
+                  text: Text(
+                    'Settings',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 20),
+                  ),
+                  icon1: Icon(
+                    Icons.arrow_forward_ios,
+                    color: Colors.green,
+                  )),
+            ),
           ]))),
     ));
   }

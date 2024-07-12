@@ -1,18 +1,57 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
-class TestPage extends StatefulWidget {
-  const TestPage({super.key});
+class PhoneNumberInput extends StatelessWidget {
+  final TextEditingController controller;
+  final String labelText;
+  final String? Function(String?) validator;
+  final String countryCode;
 
-  @override
-  State<TestPage> createState() => _TestPageState();
-}
+  const PhoneNumberInput({
+    Key? key,
+    required this.controller,
+    required this.labelText,
+    required this.validator,
+    this.countryCode = '+254', // Default country code
+  }) : super(key: key);
 
-class _TestPageState extends State<TestPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Popular Fooods',style: TextStyle(color: Colors.green,fontWeight: FontWeight.w700,fontStyle: FontStyle.italic),),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: TextFormField(
+        controller: controller,
+        decoration: InputDecoration(
+          labelText: labelText,
+          prefix: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: Text(countryCode),
+          ),
+          border: const OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.green),
+          ),
+          enabledBorder: const OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.green),
+          ),
+          focusedBorder: const OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.green),
+          ),
+          filled: true,
+          fillColor: Colors.white,
+          contentPadding:
+              const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+        ),
+        keyboardType: TextInputType.phone,
+        inputFormatters: [
+          FilteringTextInputFormatter.digitsOnly,
+          LengthLimitingTextInputFormatter(9), // Limit input to 9 digits
+        ],
+        validator: validator,
+        maxLength: 9,
+        buildCounter: (BuildContext context,
+            {int? currentLength, int? maxLength, bool? isFocused}) {
+          return null; // Hide the counter text
+        },
       ),
     );
   }

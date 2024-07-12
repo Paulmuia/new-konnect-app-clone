@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:konnect_app/pages/Authentication/login.dart';
 import 'package:konnect_app/pages/Authentication/verification_page.dart';
+import 'package:konnect_app/widgets/test.dart';
 import '../../widgets/drop_down_textFields.dart';
 import '../../widgets/text_form_fields.dart';
 
@@ -26,6 +27,17 @@ class _SignUpState extends State<SignUp> {
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController whatsappController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+
+  String? validatePhone(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Phone Number is required';
+    }
+    final phoneNumber = value.replaceFirst('+254', ''); // Assuming country code is +254
+    if (phoneNumber.length != 9 || !RegExp(r'^\d+$').hasMatch(phoneNumber)) {
+      return 'Invalid phone number. Must be 9 digits.';
+    }
+    return null; // Valid
+  }
 
   FirebaseAuth auth = FirebaseAuth.instance;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -69,7 +81,7 @@ class _SignUpState extends State<SignUp> {
   Future<void> _verifyPhoneNumber() async {
     // Start phone number verification
     String phoneNumber =
-        '+${phoneController.text}'; // Adjust country code as needed
+        '+254${phoneController.text}'; // Adjust country code as needed
     await auth.verifyPhoneNumber(
       phoneNumber: phoneNumber,
       verificationCompleted: (PhoneAuthCredential credential) {
@@ -211,17 +223,8 @@ class _SignUpState extends State<SignUp> {
                       ),
                       Row(
                         children: [
-                          Expanded(
-                            child: TextFormFields(
-                              controller: phoneController,
-                              labelText: '+254XXXXXXXXX',
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Please enter your phone number';
-                                }
-                                return null;
-                              },
-                            ),
+                        Expanded(
+                            child: PhoneNumberInput(controller: phoneController, labelText: "Phone number", validator: validatePhone)
                           ),
                           Expanded(
                             child: DropdownButtonFormFieldWithMargin(

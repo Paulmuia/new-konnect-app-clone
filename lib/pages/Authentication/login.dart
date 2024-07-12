@@ -4,7 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:konnect_app/pages/Authentication/verification_page.dart';
-import '../../widgets/text_form_fields.dart';
+import 'package:konnect_app/pages/home_page.dart';
+import 'package:konnect_app/widgets/test.dart';
 import 'sign_up.dart';
 
 class Login extends StatefulWidget {
@@ -19,6 +20,18 @@ class _LoginState extends State<Login> {
   final _formKey = GlobalKey<FormState>();
   bool isLoading = false;
 
+
+String? validatePhone(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Phone Number is required';
+    }
+    final phoneNumber = value.replaceFirst('+254', ''); // Assuming country code is +254
+    if (phoneNumber.length != 9 || !RegExp(r'^\d+$').hasMatch(phoneNumber)) {
+      return 'Invalid phone number. Must be 9 digits.';
+    }
+    return null; // Valid
+  }
+
   FirebaseAuth auth = FirebaseAuth.instance;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
@@ -28,7 +41,7 @@ void _login() async {
       isLoading = true;
     });
 
-    String phoneNumber = '+${phoneController.text}';
+    String phoneNumber = '+254${phoneController.text}';
     print('Logging in with phone number: $phoneNumber');
 
     try {
@@ -70,12 +83,11 @@ Future<bool> _checkIfUserExists(String phoneNumber) async {
 }
 
 void _verifyPhoneNumber(String phoneNumber) async {
-  // Start phone number verification with Firebase Authentication
   await FirebaseAuth.instance.verifyPhoneNumber(
     phoneNumber: phoneNumber,
-    verificationCompleted: (PhoneAuthCredential credential) {
-      // Auto-retrieve verification code (e.g., on Android)
-      // signInWithCredential(credential);
+    verificationCompleted: (PhoneAuthCredential credential) async {
+      await auth.signInWithCredential(credential);
+      Get.offAll(() => HomePage()); // Navigate to home page
     },
     verificationFailed: (FirebaseAuthException e) {
       setState(() {
@@ -85,11 +97,10 @@ void _verifyPhoneNumber(String phoneNumber) async {
       _showSnackbar('Verification failed. Please try again.');
     },
     codeSent: (String verificationId, int? resendToken) {
-      // Navigate to verification page and pass verificationId
       Get.offAll(() => VerificationPage(
         verificationId: verificationId,
-        firstName: '', // Pass default values if needed
-        lastName: '', // Pass default values if needed
+        firstName: '',
+        lastName: '',
         selectedAge: '',
         selectedHousehold: '',
         whatsappNumber: '',
@@ -99,6 +110,7 @@ void _verifyPhoneNumber(String phoneNumber) async {
     codeAutoRetrievalTimeout: (String verificationId) {},
   );
 }
+
 
 
 
@@ -222,17 +234,9 @@ void _verifyPhoneNumber(String phoneNumber) async {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      TextFormFields(
-                        controller: phoneController,
-                        labelText: '+254XXXXXXXXX',
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter your mobile number';
-                          }
-                          // Add more validation as needed
-                          return null;
-                        },
-                      ),
+                      
+PhoneNumberInput(controller: phoneController, labelText: "Phone number", validator: validatePhone),
+                      
                       const SizedBox(height: 10),
                       Center(
                         child: GestureDetector(
