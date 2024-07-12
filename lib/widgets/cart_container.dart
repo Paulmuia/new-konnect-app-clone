@@ -11,7 +11,7 @@ class CartContainer extends StatefulWidget {
   final double height2;
   final double width2;
   final double borderRadius2;
-  final Function(int)? updateItemCount; // Function to update itemCount
+  // Function to update itemCount
 
   const CartContainer({
     Key? key,
@@ -25,7 +25,7 @@ class CartContainer extends StatefulWidget {
     required this.height2,
     required this.width2,
     required this.borderRadius2,
-    this.updateItemCount, // Receive the function here
+  // Receive the function here
   }) : super(key: key);
 
   @override
@@ -61,7 +61,7 @@ class _CartContainerState extends State<CartContainer> {
     });
 
     // Call the function to update itemCount in DetailedPage
-    widget.updateItemCount!(itemCount);
+    
   }
 
   void removeItemFromCart() {
@@ -71,7 +71,7 @@ class _CartContainerState extends State<CartContainer> {
       });
 
       // Update itemCount in DetailedPage
-      widget.updateItemCount!(itemCount);
+     
     }
   }
 
@@ -81,7 +81,7 @@ class _CartContainerState extends State<CartContainer> {
     });
 
     // Update itemCount in DetailedPage
-    widget.updateItemCount!(0);
+   
   }
 
   @override

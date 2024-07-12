@@ -261,7 +261,7 @@ class _SearchPageState extends State<SearchPage> {
                                             texts[i],
                                             style: const TextStyle(
                                               color: Colors.black,
-                                              fontSize: 20,
+                                              fontSize: 18,
                                               fontWeight: FontWeight.w600,
                                             ),
                                             overflow: TextOverflow.ellipsis,
@@ -278,13 +278,15 @@ class _SearchPageState extends State<SearchPage> {
                                                   fontSize: 20,
                                                 ),
                                               ),
-                                              const SizedBox(width: 20),
-                                              Text(
-                                                'Ksh ${markedPrice[i]}',
-                                                style: const TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 16,
-                                                  decoration: TextDecoration.lineThrough,
+                                              const SizedBox(width: 18),
+                                              Center(
+                                                child: Text(
+                                                  'Ksh ${markedPrice[i]}',
+                                                  style: const TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 18,
+                                                    decoration: TextDecoration.lineThrough,
+                                                  ),
                                                 ),
                                               ),
                                             ],
@@ -315,7 +317,7 @@ class _SearchPageState extends State<SearchPage> {
                       )
                     : const Center(
                         child: Text(
-                          'No item found',
+                          'No items found',
                           style: TextStyle(
                             fontSize: 18,
                             color: Colors.red,

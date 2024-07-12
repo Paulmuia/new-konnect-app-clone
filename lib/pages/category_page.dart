@@ -1,12 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart'; // Simplified import for Get package
-import 'package:konnect_app/pages/account_page.dart';
-import 'package:konnect_app/pages/cart_page.dart';
+
 import 'package:konnect_app/pages/detailed_page.dart';
-import 'package:konnect_app/pages/notification_page.dart';
-import 'package:konnect_app/pages/search_page.dart';
+
 import 'package:konnect_app/widgets/cart_container.dart';
 
 class CategoryPage extends StatefulWidget {
@@ -126,7 +122,7 @@ class _CategoryPageState extends State<CategoryPage> {
     230, // Another weekly item
     200, // Price for new item
   ];
-   final List<int> markedPrice = [
+  final List<int> markedPrice = [
     180, // Price for cup
     350, // Price for appliances
     170, // Price for drink
@@ -140,8 +136,7 @@ class _CategoryPageState extends State<CategoryPage> {
     250, // Price for wholesale item
     300, // Another weekly item
     280, // Price for new item
-   ];
-
+  ];
 
   int _selectedIndex = -1;
   int selectedContainerIndex = -1; // Initially, no item is selected
@@ -154,56 +149,6 @@ class _CategoryPageState extends State<CategoryPage> {
         child: SafeArea(
           child: Column(
             children: [
-              Container(
-                height: 55,
-                width: double.infinity,
-                color: Colors.white,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    GestureDetector(
-                      onTap: () => Get.to(const AccountPage()),
-                      child: const CircleAvatar(
-                        radius: 22,
-                        backgroundColor: Colors.green,
-                        child: Text(
-                          'MP',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ),
-                    ),
-                    const Image(
-                      width: 150,
-                      height: 40,
-                      image: AssetImage('assets/images/logo.png'),
-                    ),
-                    GestureDetector(
-                      onTap: () => Get.to( SearchPage()),
-                      child: const Icon(
-                        Icons.search,
-                        color: Colors.green,
-                        size: 30,
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () => Get.to(const NotificationPage()),
-                      child: const Icon(
-                        Icons.notifications_active_outlined,
-                        color: Colors.green,
-                        size: 30,
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () => Get.to(const CartPage()),
-                      child: const Icon(
-                        Icons.shopping_cart_outlined,
-                        color: Colors.green,
-                        size: 30,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
               Expanded(
                 child: Row(
                   children: [
@@ -397,14 +342,16 @@ class _CategoryPageState extends State<CategoryPage> {
                                                   onTap: () => Get.to(
                                                     const DetailedPage(),
                                                     arguments: {
-                                                      'offer': offers[index].toString(),
+                                                      'offer': offers[index]
+                                                          .toString(),
                                                       'image':
                                                           images[leftIndex],
                                                       'price': prices[leftIndex]
                                                           .toString(),
                                                       'text': texts[leftIndex],
-                                                      'markedPrice': markedPrice[leftIndex]
-                                                          .toString(),
+                                                      'markedPrice':
+                                                          markedPrice[leftIndex]
+                                                              .toString(),
                                                     },
                                                   ),
                                                   child: SizedBox(
@@ -520,7 +467,9 @@ class _CategoryPageState extends State<CategoryPage> {
                                                         onTap: () => Get.to(
                                                           const DetailedPage(),
                                                           arguments: {
-                                                            'offer': offers[index].toString(),
+                                                            'offer':
+                                                                offers[index]
+                                                                    .toString(),
                                                             'image': images[
                                                                 rightIndex],
                                                             'price': prices[
@@ -529,7 +478,8 @@ class _CategoryPageState extends State<CategoryPage> {
                                                             'text': texts[
                                                                 rightIndex],
                                                             'markedPrice':
-                                                                markedPrice[rightIndex]
+                                                                markedPrice[
+                                                                        rightIndex]
                                                                     .toString(),
                                                           },
                                                         ),

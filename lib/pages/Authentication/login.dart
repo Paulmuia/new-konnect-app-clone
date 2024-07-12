@@ -1,9 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/get_navigation.dart';
-import 'package:konnect_app/pages/home_page.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:get/get.dart';
+import 'package:konnect_app/pages/Authentication/verification_page.dart';
 import '../../widgets/text_form_fields.dart';
 import 'sign_up.dart';
 
@@ -19,21 +19,151 @@ class _LoginState extends State<Login> {
   final _formKey = GlobalKey<FormState>();
   bool isLoading = false;
 
-  void _login() async {
-    if (_formKey.currentState!.validate()) {
-      setState(() {
-        isLoading = true;
-      });
+  FirebaseAuth auth = FirebaseAuth.instance;
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-      // Simulate a network request or some async operation
-      await Future.delayed(const Duration(seconds: 4));
+void _login() async {
+  if (_formKey.currentState!.validate()) {
+    setState(() {
+      isLoading = true;
+    });
 
+    String phoneNumber = '+${phoneController.text}';
+    print('Logging in with phone number: $phoneNumber');
+
+    try {
+      // Check if user exists in Firestore
+      bool userExists = await _checkIfUserExists(phoneNumber);
+
+      if (userExists) {
+        // User exists, initiate phone number verification
+        _verifyPhoneNumber(phoneNumber);
+      } else {
+        setState(() {
+          isLoading = false;
+        });
+        _showSnackbar('User does not exist. Please sign up.');
+      }
+    } catch (e) {
       setState(() {
         isLoading = false;
       });
-
-      Get.offAll(HomePage());
+      print("Error checking user existence: $e");
+      _showSnackbar('Error checking user existence. Please try again.');
     }
+  }
+}
+
+Future<bool> _checkIfUserExists(String phoneNumber) async {
+  try {
+    // Query Firestore for users with the given phone number
+    QuerySnapshot result = await FirebaseFirestore.instance
+        .collection('users')
+        .where('phoneNumber', isEqualTo: phoneNumber)
+        .get();
+
+    return result.docs.isNotEmpty;
+  } catch (e) {
+    print("Error checking user existence: $e");
+    return false;
+  }
+}
+
+void _verifyPhoneNumber(String phoneNumber) async {
+  // Start phone number verification with Firebase Authentication
+  await FirebaseAuth.instance.verifyPhoneNumber(
+    phoneNumber: phoneNumber,
+    verificationCompleted: (PhoneAuthCredential credential) {
+      // Auto-retrieve verification code (e.g., on Android)
+      // signInWithCredential(credential);
+    },
+    verificationFailed: (FirebaseAuthException e) {
+      setState(() {
+        isLoading = false;
+      });
+      print("Verification failed: ${e.message}");
+      _showSnackbar('Verification failed. Please try again.');
+    },
+    codeSent: (String verificationId, int? resendToken) {
+      // Navigate to verification page and pass verificationId
+      Get.offAll(() => VerificationPage(
+        verificationId: verificationId,
+        firstName: '', // Pass default values if needed
+        lastName: '', // Pass default values if needed
+        selectedAge: '',
+        selectedHousehold: '',
+        whatsappNumber: '',
+        selectedSex: '',
+      ));
+    },
+    codeAutoRetrievalTimeout: (String verificationId) {},
+  );
+}
+
+
+
+  Future<bool> _checkUserExists(String phoneNumber) async {
+    try {
+      QuerySnapshot querySnapshot = await firestore
+          .collection('users')
+          .where('phoneNumber', isEqualTo: phoneNumber)
+          .get();
+
+      return querySnapshot.docs.isNotEmpty;
+    } catch (e) {
+      print("Error checking user existence: $e");
+      return false;
+    }
+  }
+
+  Future<void> _sendOTP(String phoneNumber) async {
+    // Start phone number verification
+    await auth.verifyPhoneNumber(
+      phoneNumber: phoneNumber,
+      verificationCompleted: (PhoneAuthCredential credential) {
+        // Auto-retrieve verification code (e.g., on Android)
+        // signInWithCredential(credential);
+      },
+      verificationFailed: (FirebaseAuthException e) {
+        setState(() {
+          isLoading = false;
+        });
+        print("Verification failed: ${e.message}");
+        // Handle verification failure, e.g., show error dialog
+      },
+      codeSent: (String verificationId, int? resendToken) {
+        // Navigate to verification page and pass verificationId
+        Get.offAll(() => VerificationPage(
+              verificationId: verificationId,
+              firstName: '', // Pass appropriate values or empty strings
+              lastName: '', // Pass appropriate values or empty strings
+              selectedAge: '', // Pass appropriate values or empty strings
+              selectedHousehold: '', // Pass appropriate values or empty strings
+              whatsappNumber: '', // Pass appropriate values or empty strings
+              selectedSex: '', // Pass appropriate values or empty strings
+            ));
+      },
+      codeAutoRetrievalTimeout: (String verificationId) {},
+    );
+  }
+
+  void _showSnackbar(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Center(
+          child: Text(
+            message,
+            style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
+          ),
+        ),
+        backgroundColor: Colors.red,
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+        margin: const EdgeInsets.symmetric(horizontal: 45, vertical: 30),
+      ),
+    );
   }
 
   @override
@@ -64,9 +194,7 @@ class _LoginState extends State<Login> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const SizedBox(
-                        height: 10,
-                      ),
+                      const SizedBox(height: 10),
                       const Center(
                         child: Image(
                           height: 30,
@@ -74,9 +202,7 @@ class _LoginState extends State<Login> {
                           image: AssetImage('assets/images/logo.png'),
                         ),
                       ),
-                      const SizedBox(
-                        height: 20,
-                      ),
+                      const SizedBox(height: 20),
                       const Center(
                         child: Text(
                           'Log in to your account',
@@ -87,9 +213,7 @@ class _LoginState extends State<Login> {
                           ),
                         ),
                       ),
-                      const SizedBox(
-                        height: 10,
-                      ),
+                      const SizedBox(height: 10),
                       const Text(
                         '    Mobile Number',
                         style: TextStyle(
@@ -105,13 +229,11 @@ class _LoginState extends State<Login> {
                           if (value == null || value.isEmpty) {
                             return 'Please enter your mobile number';
                           }
-                          
+                          // Add more validation as needed
                           return null;
                         },
                       ),
-                      const SizedBox(
-                        height: 10,
-                      ),
+                      const SizedBox(height: 10),
                       Center(
                         child: GestureDetector(
                           onTap: _login,
@@ -139,16 +261,17 @@ class _LoginState extends State<Login> {
                           ),
                         ),
                       ),
-                      const SizedBox(
-                        height: 10,
-                      ),
+                      const SizedBox(height: 10),
                       Center(
                         child: RichText(
                           text: TextSpan(
                             children: [
                               const TextSpan(
                                 text: "Don't have an account",
-                                style: TextStyle(color: Colors.black, fontSize: 15),
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 15,
+                                ),
                               ),
                               TextSpan(
                                 recognizer: TapGestureRecognizer()

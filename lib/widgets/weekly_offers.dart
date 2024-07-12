@@ -1,13 +1,13 @@
-
-
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:konnect_app/pages/detailed_page.dart';
 import 'package:konnect_app/widgets/cart_container.dart';
 
 class WeeklyOffers extends StatelessWidget {
+
+// Singleton instance of cart
+
   final List<AssetImage> images = [
     const AssetImage('assets/images/ajabmaize.jpeg'),
     const AssetImage('assets/images/nescafe.jpeg'),
@@ -67,7 +67,7 @@ class WeeklyOffers extends StatelessWidget {
     250, // Price for wholesale item
     300, // Another weekly item
     280, // Price for new item
-   ];
+  ];
 
   final List<String> texts = [
     'Ajab Wheat Flour 2kg',
@@ -130,14 +130,15 @@ class WeeklyOffers extends StatelessWidget {
                       left: 0,
                       right: 0,
                       child: GestureDetector(
-                        onTap: () => Get.to( const DetailedPage(),
-                            arguments: {
-                  'image': images[index],
-                  'price': prices[index].toString(),
-                  'offer': offers[index].toString(),
-                  'text': texts[index],
-                  'markedPrice': markedPrice[index].toString(),
-                },
+                        onTap: () => Get.to(
+                          const DetailedPage(),
+                          arguments: {
+                            'image': images[index],
+                            'price': prices[index].toString(),
+                            'offer': offers[index].toString(),
+                            'text': texts[index],
+                            'markedPrice': markedPrice[index].toString(),
+                          },
                         ),
                         child: Container(
                             height: 120,
@@ -174,19 +175,18 @@ class WeeklyOffers extends StatelessWidget {
                               ),
                             ),
                             const Center(
-                              child:CartContainer(
-                                height1: 30, 
-                                width1: 140, 
-                                borderRadius1: 15, 
-                                containerColor1: Colors.white, 
-                                textColor1: Colors.green, 
-                                height2: 30, 
-                                width2: 140, 
-                                borderRadius2: 10,
-                                borderWidth1: 1,
-                                borderColor1: Colors.green,
-                                )
-                            )
+                                child: CartContainer(
+                              height1: 30,
+                              width1: 140,
+                              borderRadius1: 15,
+                              containerColor1: Colors.white,
+                              textColor1: Colors.green,
+                              height2: 30,
+                              width2: 140,
+                              borderRadius2: 10,
+                              borderWidth1: 1,
+                              borderColor1: Colors.green,
+                            ))
                           ],
                         ),
                       ),

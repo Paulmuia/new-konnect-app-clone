@@ -31,14 +31,16 @@ class TextFormFields extends StatelessWidget {
           ),
           filled: true,
           fillColor: Colors.white,
-          contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+          contentPadding:
+              const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
         ),
-        validator: validator ?? (value) {
-          if (value!.isEmpty) {
-            return '$labelText is required';
-          }
-          return null;
-        },
+        validator: validator ??
+            (value) {
+              if (value!.isEmpty) {
+                return '$labelText is required';
+              }
+              return null;
+            },
       ),
     );
   }

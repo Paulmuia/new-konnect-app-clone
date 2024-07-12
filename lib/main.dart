@@ -1,11 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:get/get.dart';
+import 'package:konnect_app/controllers/cart_controller.dart';
 import 'package:konnect_app/pages/Authentication/login.dart';
-
-
-
-
+import 'package:konnect_app/widgets/test.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,8 +13,6 @@ Future<void> main() async {
       appId: "1:531611479653:android:17c69baf64a001f74fe08c",
       messagingSenderId: "531611479653",
       projectId: "konnect-clone-d458e",
-      
-      
     ),
   );
   runApp(const MyApp());
@@ -27,9 +23,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  const    GetMaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Login()
+      home:  const Login(),
+      initialBinding: BindingsBuilder(() {
+        Get.put(CartController());
+      }),
     );
   }
 }

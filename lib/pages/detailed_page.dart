@@ -5,6 +5,7 @@ import 'package:konnect_app/pages/cart_page.dart';
 import 'package:konnect_app/pages/category_page.dart';
 import 'package:konnect_app/pages/home_page.dart';
 import 'package:konnect_app/widgets/cart_container.dart';
+import 'package:konnect_app/widgets/cart_icon.dart';
 
 class DetailedPage extends StatefulWidget {
   const DetailedPage({Key? key}) : super(key: key);
@@ -20,14 +21,9 @@ class _DetailedPageState extends State<DetailedPage> {
 
   double _containerHeight = 0;
 
-  int itemCount = 0; // New variable to track the number of items in the cart
+  int itemCount = 0;
 
-  // Define a function to update itemCount
-  void updateItemCount(int count) {
-    setState(() {
-      itemCount = count;
-    });
-  }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -72,34 +68,7 @@ class _DetailedPageState extends State<DetailedPage> {
                       children: [
                         GestureDetector(
                           onTap: () => Get.to(const CartPage()),
-                          child: Stack(
-                            children: [
-                              const Icon(
-                                Icons.shopping_cart_outlined,
-                                color: Colors.green,
-                                size: 35,
-                              ),
-                              if (itemCount > 0) // Only show the circular widget if there are items in the cart
-                                Positioned(
-                                  right: 0,
-                                  top: 0,
-                                  child: Container(
-                                    padding: const EdgeInsets.all(4),
-                                    decoration: const BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: Colors.red,
-                                    ),
-                                    child: Text(
-                                      itemCount.toString(),
-                                      style: const TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 12,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                            ],
-                          ),
+                          child:   CartIcon(itemCount: itemCount,),
                         ),
                         const SizedBox(width: 10),
                         GestureDetector(
@@ -339,7 +308,7 @@ class _DetailedPageState extends State<DetailedPage> {
                           borderRadius2: 10,
                           containerColor1: Colors.green,
                           textColor1: Colors.white,
-                          updateItemCount: updateItemCount,
+                          
                         )
                       ],
                     ),

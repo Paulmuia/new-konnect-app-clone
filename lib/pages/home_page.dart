@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/src/extension_navigation.dart';
+import 'package:get/get.dart'; // Ensure Get package is imported
 import 'package:konnect_app/pages/account_page.dart';
 import 'package:konnect_app/pages/cart_page.dart';
 import 'package:konnect_app/pages/category_page.dart';
@@ -8,13 +7,14 @@ import 'package:konnect_app/pages/chat_page.dart';
 import 'package:konnect_app/pages/notification_page.dart';
 import 'package:konnect_app/pages/search_page.dart';
 import 'package:konnect_app/widgets/auto_scrolling_listview.dart';
+import 'package:konnect_app/widgets/cart_icon.dart'; // Ensure CartIcon widget is imported
 import 'package:konnect_app/widgets/category_listview.dart';
 import 'package:konnect_app/widgets/new_products.dart';
 import 'package:konnect_app/widgets/vertical_foods_listview.dart';
 import 'package:konnect_app/widgets/weekly_offers.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({super.key});
+  HomePage({Key? key}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -22,14 +22,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
-
-  static final List<Widget> _widgetOptions = <Widget>[
-    HomeContent(),
-    CategoryPage(),
-    const ChatPage(),
-    const CartPage(),
-    const AccountPage()
-  ];
+  int itemCount = 0; // Initialize itemCount
 
   void _onItemTapped(int index) {
     setState(() {
@@ -37,9 +30,97 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  void updateItemCount(int count) {
+    setState(() {
+      itemCount = count; // Update itemCount
+    });
+  }
+
+  static final List<Widget> _widgetOptions = <Widget>[
+    HomeContent(),
+    CategoryPage(),
+    const ChatPage(),
+    const CartPage(),
+    const AccountPage(),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        leading: GestureDetector(
+            onTap: () => Get.to(const AccountPage()),
+            child: const Padding(
+
+              padding: EdgeInsets.only(left: 10),
+              child: CircleAvatar(
+                radius: 20,
+                backgroundColor: Colors.green,
+                child: Text(
+                  'MP',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            ),
+          ),
+        title:  const Image(
+                        width: 150,
+                        height: 40,
+                        image: AssetImage('assets/images/logo.png')), // Optionally set a title for AppBar
+        actions: [
+          
+          const SizedBox(width: 10),
+          GestureDetector(
+            onTap: () {
+              Get.to(SearchPage());
+            },
+            child: const Icon(
+              Icons.search,
+              color: Colors.green,
+              size: 30,
+            ),
+          ),
+          const SizedBox(width: 10),
+          GestureDetector(
+            onTap: () => Get.to(const NotificationPage()),
+            child: const Icon(
+              Icons.notifications_active_outlined,
+              color: Colors.green,
+              size: 30,
+            ),
+          ),
+          const SizedBox(width: 10),
+          GestureDetector(
+            onTap: () => Get.to(const CartPage()),
+            child:Stack(
+              children: [
+                 CartIcon(itemCount: itemCount),
+                 if (itemCount > 0) // Only show the circular widget if there are items in the cart
+                                Positioned  (
+                                  right: 0,
+                                  top: 0,
+                                  child: Container(
+                                    padding: const EdgeInsets.all(4),
+                                    decoration: const BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: Colors.red,
+                                    ),
+                                    child: Text(
+                                      itemCount.toString(),
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 12,
+                                      ),
+                                    ),
+                                  ),
+                                ), 
+              ],
+            )// Pass itemCount to CartIcon
+          ),
+          const SizedBox(width: 10),
+        ],
+      ),
       body: _widgetOptions.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
@@ -85,57 +166,6 @@ class HomeContent extends StatelessWidget {
         child: SafeArea(
           child: Column(
             children: [
-              Container(
-                height: 55,
-                width: double.maxFinite,
-                color: Colors.white,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    GestureDetector(
-                      onTap: () => Get.to(const AccountPage()),
-                      child: const CircleAvatar(
-                        radius: 22,
-                        backgroundColor: Colors.green,
-                        child: Text(
-                          'MP',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ),
-                    ),
-                    const Image(
-                        width: 150,
-                        height: 40,
-                        image: AssetImage('assets/images/logo.png')),
-                    GestureDetector(
-                      onTap: () {
-                        Get.to( SearchPage());
-                      },
-                      child: const Icon(
-                        Icons.search,
-                        color: Colors.green,
-                        size: 30,
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () => Get.to(const NotificationPage()),
-                      child: const Icon(
-                        Icons.notifications_active_outlined,
-                        color: Colors.green,
-                        size: 30,
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () => Get.to(const CartPage()),
-                      child: const Icon(
-                        Icons.shopping_cart_outlined,
-                        color: Colors.green,
-                        size: 30,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
               Stack(
                 children: [
                   Container(
