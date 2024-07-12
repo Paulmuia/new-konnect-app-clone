@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:konnect_app/controllers/cart_controller.dart';
 import 'package:konnect_app/pages/Authentication/login.dart';
-import 'package:konnect_app/widgets/test.dart';
+import 'package:konnect_app/pages/home_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home:  const Login(),
+      home:   HomePage(),
       initialBinding: BindingsBuilder(() {
         Get.put(CartController());
       }),

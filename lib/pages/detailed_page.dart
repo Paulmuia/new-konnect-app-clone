@@ -19,7 +19,7 @@ class _DetailedPageState extends State<DetailedPage> {
   List<String> iconTexts = List.generate(
       10, (index) => 'Items $index'); // Dummy text for the list items
 
-  double _containerHeight = 0;
+  //double _containerHeight = 0;
 
   int itemCount = 0;
 
@@ -89,7 +89,7 @@ class _DetailedPageState extends State<DetailedPage> {
               ),
               const SizedBox(height: 20),
               Container(
-                height: 350,
+                height: 280,
                 width: double.maxFinite,
                 margin: const EdgeInsets.symmetric(horizontal: 70),
                 decoration: BoxDecoration(
@@ -122,10 +122,10 @@ class _DetailedPageState extends State<DetailedPage> {
                     return true;
                   },
                   child: SingleChildScrollView(
-                    physics: const BouncingScrollPhysics(),
+                   physics: const BouncingScrollPhysics(decelerationRate: ScrollDecelerationRate.normal),
                     child: Container(
                       padding: const EdgeInsets.only(top: 10),
-                      height: MediaQuery.of(context).size.height - _containerHeight,
+                      
                       width: double.maxFinite,
                       decoration: const BoxDecoration(
                         color: Colors.white,
@@ -299,7 +299,7 @@ class _DetailedPageState extends State<DetailedPage> {
                           ),
                         ),
                         // Pass the updateItemCount function to CartContainer
-                        CartContainer(
+                       const  CartContainer(
                           height1: 40,
                           width1: 180,
                           borderRadius1: 10,

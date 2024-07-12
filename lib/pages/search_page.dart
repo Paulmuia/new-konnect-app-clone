@@ -248,7 +248,7 @@ class _SearchPageState extends State<SearchPage> {
                                   Expanded(
                                     child: Container(
                                       padding: const EdgeInsets.only(left: 10, top: 10),
-                                      height: 120,
+                                      height: 110,
                                       decoration: BoxDecoration(
                                         borderRadius: const BorderRadius.all(Radius.circular(15)),
                                         border: Border.all(width: 0.4, color: Colors.green),
@@ -261,7 +261,7 @@ class _SearchPageState extends State<SearchPage> {
                                             texts[i],
                                             style: const TextStyle(
                                               color: Colors.black,
-                                              fontSize: 18,
+                                              fontSize: 17,
                                               fontWeight: FontWeight.w600,
                                             ),
                                             overflow: TextOverflow.ellipsis,
@@ -275,7 +275,7 @@ class _SearchPageState extends State<SearchPage> {
                                                 style: const TextStyle(
                                                   color: Colors.red,
                                                   fontWeight: FontWeight.w800,
-                                                  fontSize: 20,
+                                                  fontSize: 17,
                                                 ),
                                               ),
                                               const SizedBox(width: 18),
@@ -284,13 +284,14 @@ class _SearchPageState extends State<SearchPage> {
                                                   'Ksh ${markedPrice[i]}',
                                                   style: const TextStyle(
                                                     color: Colors.black,
-                                                    fontSize: 18,
+                                                    fontSize: 17,
                                                     decoration: TextDecoration.lineThrough,
                                                   ),
                                                 ),
                                               ),
                                             ],
                                           ),
+                                          const SizedBox(height: 5,),
                                           const Center(
                                             child: CartContainer(
                                               height1: 40,
