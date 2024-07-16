@@ -66,7 +66,7 @@ class _HomePageState extends State<HomePage> {
           ),
         title:  const Image(
                         width: 150,
-                        height: 40,
+                        height: 60,
                         image: AssetImage('assets/images/logo.png')), // Optionally set a title for AppBar
         actions: [
           
