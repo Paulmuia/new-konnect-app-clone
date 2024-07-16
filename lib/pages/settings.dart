@@ -56,7 +56,7 @@ class SettingsPage extends StatelessWidget {
               const SizedBox(height: 300,),
               Center(
                           child: GestureDetector(
-                            onTap: () => _logout,
+                            onTap: _logout,
                             child: Container(
                               height: 50,
                               width: 160,
