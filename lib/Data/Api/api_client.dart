@@ -13,10 +13,44 @@ class _SearchPageState extends State<SearchPage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title:const Text('Search Page', style: TextStyle(color: Colors.green,fontWeight: FontWeight.w700,fontStyle: FontStyle.italic),),
+        title: const Text(
+          'Search Page',
+          style: TextStyle(
+              color: Colors.green,
+              fontWeight: FontWeight.w700,
+              fontStyle: FontStyle.italic),
+        ),
       ),
       body: Container(
-        color: Colors.green,
+        width: double.maxFinite,
+        decoration: BoxDecoration(
+          borderRadius: const BorderRadius.all(Radius.circular(10)),
+          border: Border.all(width: 1, color: Colors.green),
+        ),
+        child: ListView.builder(itemBuilder: (context, index) {
+          return Stack(
+            children: [
+              Positioned(
+                top: 0,
+                left: 0,
+                right: 0,
+                child: Container(
+                  height: 300,
+                  width: double.maxFinite,
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                  decoration: BoxDecoration(
+                      color: Colors.blue,
+                      borderRadius: const BorderRadius.all(Radius.circular(20)),
+                      border: Border.all(width: 1, color: Colors.green)),
+                      
+                ),
+              )
+            ],
+          );
+        }),
       ),
     );
   }
