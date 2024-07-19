@@ -12,48 +12,26 @@ class _ApiClientState extends State<ApiClient> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
-        title: const Text(
-          'Search Page',
-          style: TextStyle(
-              color: Colors.green,
-              fontWeight: FontWeight.w700,
-              fontStyle: FontStyle.italic),
+        backgroundColor: Colors.green,
+        title:const  Text('Filtered Foods',style: TextStyle(color: Colors.white,fontSize: 25,fontWeight: FontWeight.w800,fontStyle: FontStyle.italic),),
+        leading:const  CircleAvatar(
+          backgroundColor: Colors.white,
+          radius: 10,
+          child: Icon(Icons.person,size: 30,color: Colors.green,),
         ),
-      ),
-      body: Container(
-        width: double.maxFinite,
-        margin:const  EdgeInsets.symmetric(horizontal: 10,vertical: 10),
-        decoration: BoxDecoration(
-          borderRadius: const BorderRadius.all(Radius.circular(10)),
-          border: Border.all(width: 1, color: Colors.green),
-        ),
-        child: ListView.builder(
-          itemCount: 10,
-          itemBuilder: (context, index) {
-          return Container(
-            height: 200,
-            margin: const EdgeInsets.symmetric(vertical: 10),
-            width: double.maxFinite,
-            //color: Colors.blue,
-            child: Stack(
-            children: [
-              Container(
-                height: 180,
-                 width: double.maxFinite,
-                margin:
-                    const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                decoration: BoxDecoration(
-                    
-                    borderRadius: const BorderRadius.all(Radius.circular(20)),
-                    border: Border.all(width: 1, color: Colors.green)),
-              )
-            ],
-          ),
-          );
-        }),
+        actions:const  [
+          Icon(Icons.search,color: Colors.white,size: 20,),
+          SizedBox(width: 10,),
+          Icon(Icons.shopping_cart_outlined,color: Colors.white,size: 20,),
+          SizedBox(width: 10,),
+          Icon(Icons.notifications_active,color: Colors.white,size: 20,),
+          SizedBox(width: 10,),
+          Icon(Icons.more_vert_outlined,color: Colors.white,size:20),
+          SizedBox(width: 10,),
+          
+
+
+        ],
       ),
     );
   }
