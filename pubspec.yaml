@@ -47,6 +47,7 @@ dependencies:
   shared_preferences: ^2.2.3
   intl_phone_field: ^3.2.0
   phone_form_field: ^9.2.5
+  animated_rating_stars: ^1.0.1
 
 dev_dependencies:
   flutter_test:
