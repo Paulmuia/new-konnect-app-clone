@@ -65,9 +65,10 @@ class _ApiClientState extends State<ApiClient> {
               ),
             ),
             const SizedBox(
-              height: 20,
+              height: 10,
             ),
             Container(
+              padding: const EdgeInsets.only(top: 5),
               color: Colors.white,
               width: double.maxFinite,
               height: 260,
@@ -223,7 +224,7 @@ class _ApiClientState extends State<ApiClient> {
                       activeSize: Size(15, 15),
                       size: Size(10, 10),
                     ),
-                    dotsCount: 5)),
+                    dotsCount: 7)),
             const SizedBox(
               height: 20,
             ),
