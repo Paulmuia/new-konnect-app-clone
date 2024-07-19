@@ -45,11 +45,11 @@ class InitialScreen extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
         } else if (snapshot.hasData) {
-          return  HomePage();
+          return HomePage();
         } else {
           return const Login();
         }
       },
     );
   }
-}      
+}
