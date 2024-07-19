@@ -11,12 +11,11 @@ class _FoodPageState extends State<FoodPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        width: double.maxFinite,
-        color: Colors.blue,
-        child: Column(
-        children: [
-         Stack(
+      backgroundColor: Colors.green,
+      body: Column(
+      children: [
+       Expanded(
+         child: Stack(
           children: [
             Container(
               height: 350,
@@ -29,19 +28,20 @@ class _FoodPageState extends State<FoodPage> {
               top: 300,
               left: 0,
               right: 0,
-              child:Container(
+              child: Container(
                 width: double.maxFinite,
-                height: 500,
+               height: 500,
                 decoration:const  BoxDecoration(
                   borderRadius: BorderRadius.only(topLeft: Radius.circular(20),topRight: Radius.circular(20)),
-                  color: Colors.blue
+                  color: Colors.white
                 ),
-              ) ,)
+              ),
+            )
           ],
-         )
-        ],
-            ),
-      ),
+         ),
+       )
+      ],
+          ),
     );
   }
 }
