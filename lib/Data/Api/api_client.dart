@@ -1,6 +1,8 @@
 import 'package:animated_rating_stars/animated_rating_stars.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:konnect_app/Data/Api/food_page.dart';
 import 'package:konnect_app/widgets/icon_texts.dart';
 
 class ApiClient extends StatefulWidget {
@@ -11,6 +13,74 @@ class ApiClient extends StatefulWidget {
 }
 
 class _ApiClientState extends State<ApiClient> {
+
+  final List<String> texts = [
+    'Greek salad',
+    'Veg salad',
+    'Clover Salad',
+    'Chicken Salad',
+    'Lasagna Rolls',
+    'Peri Peri Rolls',
+    'Chicken Rolls',
+    'Veg Rolls',
+    'Ripple Ice Cream',
+    'Fruit Ice Cream',
+    'Jar Ice Cream',
+    'Vanilla Ice Cream',
+    'Chicken Sandwich',
+    'Vegan Sandwich',
+    'Grilled Sandwich',
+    'Bread Sandwich',
+    'Cup Cake',
+    'Vegan Cake',
+    'Butterscotch Cake',
+    'Sliced Cake',
+    'Garlic Mushroom',
+    'Fried Cauliflower',
+    'Mix Veg Pulao',
+    'Rice Zucchini',
+    'Cheese Pasta',
+    'Tomato Pasta',
+    'Creamy Pasta',
+    'Chicken Pasta',
+    'Butter Noodles',
+    'Veg Noodles',
+    'Somen Noodles',
+    'Cooked Noodles',
+];
+final List<AssetImage> images = [
+  const AssetImage('assets/testing/food_1.png'),
+  const AssetImage('assets/testing/food_2.png'),
+  const AssetImage('assets/testing/food_3.png'),
+  const AssetImage('assets/testing/food_4.png'),
+  const AssetImage('assets/testing/food_5.png'),
+  const AssetImage('assets/testing/food_6.png'),
+  const AssetImage('assets/testing/food_7.png'),
+  const AssetImage('assets/testing/food_8.png'),
+  const AssetImage('assets/testing/food_9.png'),
+  const AssetImage('assets/testing/food_10.png'),
+  const AssetImage('assets/testing/food_11.png'),
+  const AssetImage('assets/testing/food_12.png'),
+  const AssetImage('assets/testing/food_13.png'),
+  const AssetImage('assets/testing/food_14.png'),
+  const AssetImage('assets/testing/food_15.png'),
+  const AssetImage('assets/testing/food_16.png'),
+  const AssetImage('assets/testing/food_17.png'),
+  const AssetImage('assets/testing/food_18.png'),
+  const AssetImage('assets/testing/food_19.png'),
+  const AssetImage('assets/testing/food_20.png'),
+  const AssetImage('assets/testing/food_21.png'),
+  const AssetImage('assets/testing/food_22.png'),
+  const AssetImage('assets/testing/food_23.png'),
+  const AssetImage('assets/testing/food_24.png'),
+  const AssetImage('assets/testing/food_25.png'),
+  const AssetImage('assets/testing/food_26.png'),
+  const AssetImage('assets/testing/food_27.png'),
+  const AssetImage('assets/testing/food_28.png'),
+  const AssetImage('assets/testing/food_29.png'),
+  const AssetImage('assets/testing/food_30.png'),
+  const AssetImage('assets/testing/food_31.png'),
+];
   PageController pageController = PageController(viewportFraction: 0.85);
   @override
   Widget build(BuildContext context) {
@@ -73,41 +143,15 @@ class _ApiClientState extends State<ApiClient> {
               width: double.maxFinite,
               height: 260,
               child: PageView.builder(
-                  itemCount: 10,
+                  itemCount: images.length,
                   controller: pageController,
                   itemBuilder: (context, index) {
                     return Stack(
                       children: [
-                        Container(
-                          height: 160,
-                          margin: const EdgeInsets.symmetric(
-                              horizontal: 10, vertical: 10),
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 10, vertical: 10),
-                          width: double.maxFinite,
-                          decoration: BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(0.5),
-                                spreadRadius: 1,
-                                blurRadius: 1,
-                                offset: const Offset(
-                                    0, 3), // changes position of shadow
-                              ),
-                            ],
-                            image: const DecorationImage(
-                                image: AssetImage('assets/images/food_14.png'),
-                                fit: BoxFit.cover),
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(10)),
-                          ),
-                        ),
-                        Positioned(
-                          top: 130,
-                          left: 10,
-                          right: 10,
+                        GestureDetector(
+                          onTap: () => Get.to(FoodPage()),
                           child: Container(
-                            height: 110,
+                            height: 160,
                             margin: const EdgeInsets.symmetric(
                                 horizontal: 10, vertical: 10),
                             padding: const EdgeInsets.symmetric(
@@ -118,94 +162,126 @@ class _ApiClientState extends State<ApiClient> {
                                 BoxShadow(
                                   color: Colors.grey.withOpacity(0.5),
                                   spreadRadius: 1,
-                                  blurRadius: 3,
+                                  blurRadius: 1,
                                   offset: const Offset(
                                       0, 3), // changes position of shadow
                                 ),
                               ],
-                              color: Colors.white,
+                              image:  DecorationImage(
+                                  image: images[index],
+                                  fit: BoxFit.cover),
                               borderRadius:
-                                  const BorderRadius.all(Radius.circular(15)),
-                              //border: Border.all(width: 1,color: Colors.green),
+                                  const BorderRadius.all(Radius.circular(10)),
                             ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Text(
-                                  '  Vegan Sandwich',
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w700),
-                                ),
-                                Row(
-                                  children: [
-                                    AnimatedRatingStars(
-                                      initialRating: 3.5,
-                                      minRating: 0.0,
-                                      maxRating: 5.0,
-                                      filledColor: Colors.blue,
-                                      emptyColor: Colors.grey,
-                                      filledIcon: Icons.star,
-                                      halfFilledIcon: Icons.star_half,
-                                      emptyIcon: Icons.star_border,
-                                      onChanged: (double rating) {},
-                                      displayRatingValue: true,
-                                      interactiveTooltips: true,
-                                      customFilledIcon: Icons.star,
-                                      customHalfFilledIcon: Icons.star_half,
-                                      customEmptyIcon: Icons.star_border,
-                                      starSize: 15,
-                                      animationDuration:
-                                          const Duration(milliseconds: 300),
-                                      animationCurve: Curves.easeInOut,
-                                      readOnly: false,
-                                    ),
-                                    const SizedBox(
-                                      width: 5,
-                                    ),
-                                    const Text(
-                                      '4.5',
-                                      style: TextStyle(
-                                          fontSize: 19,
-                                          fontWeight: FontWeight.w500),
-                                    ),
-                                    const SizedBox(
-                                      width: 5,
-                                    ),
-                                    const Text(
-                                      '1200 comments',
-                                      style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w500),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                const Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    IconText(
-                                        icon: Icons.circle,
-                                        color: Colors.amber,
-                                        size: 20,
-                                        text: 'Normal'),
-                                    IconText(
-                                        icon: Icons.location_on,
-                                        color: Colors.blueGrey,
-                                        size: 20,
-                                        text: '32 KM'),
-                                    IconText(
-                                        icon: Icons.timer,
-                                        color: Colors.green,
-                                        size: 20,
-                                        text: '45 min')
-                                  ],
-                                )
-                              ],
+                          ),
+                        ),
+                        Positioned(
+                          top: 130,
+                          left: 10,
+                          right: 10,
+                          child: GestureDetector(
+                            onTap: () => Get.to(FoodPage()),
+                            child: Container(
+                              height: 110,
+                              margin: const EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 10),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 10),
+                              width: double.maxFinite,
+                              decoration: BoxDecoration(
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.5),
+                                    spreadRadius: 1,
+                                    blurRadius: 3,
+                                    offset: const Offset(
+                                        0, 3), // changes position of shadow
+                                  ),
+                                ],
+                                color: Colors.white,
+                                borderRadius:
+                                    const BorderRadius.all(Radius.circular(15)),
+                                //border: Border.all(width: 1,color: Colors.green),
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                   Text(
+                                    "   ${texts[index]}",
+                                    style: const TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w700),
+                                  ),
+                                  Row(
+                                    children: [
+                                      AnimatedRatingStars(
+                                        initialRating: 3.5,
+                                        minRating: 0.0,
+                                        maxRating: 5.0,
+                                        filledColor: Colors.blue,
+                                        emptyColor: Colors.grey,
+                                        filledIcon: Icons.star,
+                                        halfFilledIcon: Icons.star_half,
+                                        emptyIcon: Icons.star_border,
+                                        onChanged: (double rating) {},
+                                        displayRatingValue: true,
+                                        interactiveTooltips: true,
+                                        customFilledIcon: Icons.star,
+                                        customHalfFilledIcon: Icons.star_half,
+                                        customEmptyIcon: Icons.star_border,
+                                        starSize: 15,
+                                        animationDuration:
+                                            const Duration(milliseconds: 300),
+                                        animationCurve: Curves.easeInOut,
+                                        readOnly: false,
+                                      ),
+                                      const SizedBox(
+                                        width: 5,
+                                      ),
+                                      const Text(
+                                        '4.5',
+                                        style: TextStyle(
+                                            fontSize: 19,
+                                            fontWeight: FontWeight.w500),
+                                      ),
+                                      const SizedBox(
+                                        width: 5,
+                                      ),
+                                      const Text(
+                                        '1200 comments',
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w500),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  const Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      IconText(
+                                          icon: Icons.circle,
+                                          color: Colors.amber,
+                                          size: 20,
+                                          text: 'Normal'),
+                                      IconText(
+                                          icon: Icons.location_on,
+                                          color: Colors.blueGrey,
+                                          size: 20,
+                                          text: '32 KM'),
+                                      IconText(
+                                          icon: Icons.timer,
+                                          color: Colors.green,
+                                          size: 20,
+                                          text: '45 min')
+                                    ],
+                                  )
+                                ],
+                              ),
                             ),
                           ),
                         ),
@@ -256,13 +332,13 @@ class _ApiClientState extends State<ApiClient> {
                                 horizontal: 5, vertical: 5),
                             height: 120,
                             width: 120,
-                            decoration: const BoxDecoration(
+                            decoration:  BoxDecoration(
                                 image: DecorationImage(
                                     image:
-                                        AssetImage('assets/images/food_14.png'),
+                                        images[index],
                                     fit: BoxFit.cover),
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(20)),
+                                    const BorderRadius.all(Radius.circular(20)),
                                 color: Colors.white),
                           ),
                           Expanded(
@@ -271,31 +347,31 @@ class _ApiClientState extends State<ApiClient> {
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 5, vertical: 5),
                               color: Colors.white,
-                              child: const Column(
+                              child:  Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    ' Nutritious food meal in kenya',
-                                    style: TextStyle(
+                                    texts[index],
+                                    style:const  TextStyle(
                                         color: Colors.black,
                                         overflow: TextOverflow.ellipsis,
                                         fontSize: 23,
                                         fontWeight: FontWeight.w500),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 10,
                                   ),
-                                  Text(
+                                  const Text(
                                     '  With Kenyan characteristic',
                                     style: TextStyle(
                                         color: Colors.black,
                                         fontSize: 15,
                                         fontWeight: FontWeight.w300),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 10,
                                   ),
-                                  Row(
+                                  const Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceEvenly,
                                     children: [
