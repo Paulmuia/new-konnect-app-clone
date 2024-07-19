@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class SearchPage extends StatefulWidget {
-  const SearchPage({super.key});
+class ApiClient extends StatefulWidget {
+  const ApiClient({super.key});
 
   @override
-  State<SearchPage> createState() => _SearchPageState();
+  State<ApiClient> createState() => _ApiClientState();
 }
 
-class _SearchPageState extends State<SearchPage> {
+class _ApiClientState extends State<ApiClient> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,32 +23,35 @@ class _SearchPageState extends State<SearchPage> {
       ),
       body: Container(
         width: double.maxFinite,
+        margin:const  EdgeInsets.symmetric(horizontal: 10,vertical: 10),
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.all(Radius.circular(10)),
           border: Border.all(width: 1, color: Colors.green),
         ),
-        child: ListView.builder(itemBuilder: (context, index) {
-          return Stack(
+        child: ListView.builder(
+          itemCount: 10,
+          itemBuilder: (context, index) {
+          return Container(
+            height: 200,
+            margin: const EdgeInsets.symmetric(vertical: 10),
+            width: double.maxFinite,
+            //color: Colors.blue,
+            child: Stack(
             children: [
-              Positioned(
-                top: 0,
-                left: 0,
-                right: 0,
-                child: Container(
-                  height: 300,
-                  width: double.maxFinite,
-                  margin:
-                      const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                  decoration: BoxDecoration(
-                      color: Colors.blue,
-                      borderRadius: const BorderRadius.all(Radius.circular(20)),
-                      border: Border.all(width: 1, color: Colors.green)),
-                      
-                ),
+              Container(
+                height: 180,
+                 width: double.maxFinite,
+                margin:
+                    const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                decoration: BoxDecoration(
+                    
+                    borderRadius: const BorderRadius.all(Radius.circular(20)),
+                    border: Border.all(width: 1, color: Colors.green)),
               )
             ],
+          ),
           );
         }),
       ),
