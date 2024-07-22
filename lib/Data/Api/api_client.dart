@@ -85,6 +85,10 @@ final List<AssetImage> images = [
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+    appBar:AppBar(
+    centerTitle:true,
+    title:const Text('Api client',style:TextStyle(color:Colors.blue),
+    ),),
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(
@@ -316,7 +320,7 @@ final List<AssetImage> images = [
             ),
             Expanded(
               child: ListView.builder(
-                  itemCount: 10,
+                  itemCount: images.length,
                   //physics: NeverScrollableScrollPhysics(),
                   itemBuilder: (context, index) {
                     return Container(
@@ -372,6 +376,7 @@ final List<AssetImage> images = [
                                     height: 10,
                                   ),
                                   const Row(
+                                  
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceEvenly,
                                     children: [
