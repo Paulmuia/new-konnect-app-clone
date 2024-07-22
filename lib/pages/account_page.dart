@@ -51,7 +51,7 @@ class AccountPage extends StatelessWidget {
                     height: 10,
                   ),
                   Text(
-                    'Good Morning.',
+                    'Good Evening.',
                     style: TextStyle(
                         color: Colors.black,
                         fontSize: 20,
