@@ -5,7 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:konnect_app/pages/Authentication/login.dart';
 import 'package:konnect_app/pages/Authentication/verification_page.dart';
-import 'package:konnect_app/widgets/test.dart';
+import 'package:konnect_app/widgets/phone_number_input.dart';
 import '../../widgets/drop_down_textFields.dart';
 import '../../widgets/text_form_fields.dart';
 

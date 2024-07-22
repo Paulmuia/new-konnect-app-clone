@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:konnect_app/Data/Api/api_client.dart';
 import 'package:konnect_app/controllers/cart_controller.dart';
 import 'package:konnect_app/pages/Authentication/login.dart';
 import 'package:konnect_app/pages/home_page.dart';
